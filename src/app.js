@@ -47,6 +47,7 @@ app.get("/help", (req, res) => {
 
 app.get("/weather", (req, res) => {
   let address = req.query.address;
+
   if (!address) {
     console.log("Please provide an address");
   } else {
@@ -60,12 +61,9 @@ app.get("/weather", (req, res) => {
           return console.log(error);
         }
 
-        const description = `${data.location}\n${forecastData}`;
-
-        res.render("weather", {
-          title: "Weather Response",
-          description,
-          name: "Nirbhay",
+        res.send({
+          location: data.location,
+          forecastData,
         });
       });
     });
